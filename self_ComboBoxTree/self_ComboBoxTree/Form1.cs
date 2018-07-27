@@ -15,9 +15,6 @@ namespace self_ComboBoxTree
         public Form1()
         {
             InitializeComponent();
-
-
-
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -77,6 +74,19 @@ namespace self_ComboBoxTree
                     CopyChildren(newTn, tn);
                 }
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if((textBox1.Text.Trim()).Length>0)
+            {
+                MessageBox.Show(textBox1.Text.Trim());
+            }
+        }
+
+        private void comboBoxTree1_Value_Changed(object sender, EventArgs e)
+        {
+            textBox1.Text = comboBoxTree1.Text;
         }
     }
 }

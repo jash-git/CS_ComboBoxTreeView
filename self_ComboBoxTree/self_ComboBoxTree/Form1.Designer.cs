@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBoxTree1 = new Verlinea.ComboBoxTree.ComboBoxTree();
             this.SuspendLayout();
             // 
@@ -41,22 +42,29 @@
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(588, 59);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(455, 27);
+            this.textBox1.TabIndex = 2;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // comboBoxTree1
             // 
-            this.comboBoxTree1.AbsoluteChildrenSelectableOnly = true;
-            this.comboBoxTree1.BranchSeparator = ".";
-            this.comboBoxTree1.Imagelist = null;
             this.comboBoxTree1.Location = new System.Drawing.Point(588, 16);
-            this.comboBoxTree1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxTree1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxTree1.Name = "comboBoxTree1";
             this.comboBoxTree1.Size = new System.Drawing.Size(456, 28);
             this.comboBoxTree1.TabIndex = 1;
+            this.comboBoxTree1.Value_Changed += new System.EventHandler(this.comboBoxTree1_Value_Changed);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1160, 488);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBoxTree1);
             this.Controls.Add(this.treeView1);
             this.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -65,6 +73,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -72,6 +81,7 @@
 
         private System.Windows.Forms.TreeView treeView1;
         private Verlinea.ComboBoxTree.ComboBoxTree comboBoxTree1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

@@ -52,7 +52,7 @@ namespace Verlinea.ComboBoxTree
 		public ImageList Imagelist 
 		{
 			get {return this.tvTreeView.ImageList;}
-			set {this.tvTreeView.ImageList = value;}
+			set{this.tvTreeView.ImageList = value;}
 		}
 		[Browsable(true), Description("The text in the ComboBoxTree control"), Category("Appearance")]
 		public override string Text
@@ -82,6 +82,12 @@ namespace Verlinea.ComboBoxTree
 		{
 			this.InitializeComponent();
 
+            //---
+            //jash add Object init
+            this.AbsoluteChildrenSelectableOnly = true;
+            this.BranchSeparator = ".";
+            //---jash add Object init
+
             // Initializing Controls
             this.m_blnSowToggleTreeView = false;//jash add
             this.pnlBack = new Panel();
@@ -92,8 +98,9 @@ namespace Verlinea.ComboBoxTree
 			this.tbSelectedValue = new TextBox();
             this.tbSelectedValue.ReadOnly = true;//jash add
             this.tbSelectedValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbSelectedValue.TextChanged += new System.EventHandler(this.Data_Changed);//jash add
 
-			this.btnSelect = new ButtonEx();
+            this.btnSelect = new ButtonEx();
 			this.btnSelect.Click += new EventHandler(ToggleTreeView);
 			this.btnSelect.FlatStyle = FlatStyle.Flat;
 
@@ -132,7 +139,30 @@ namespace Verlinea.ComboBoxTree
 			this.Controls.Add(this.pnlBack);
 		}
 
-		private void RelocateGrip() 
+        //---
+        //C#元件事件轉發 jash add
+        public event EventHandler Value_Changed;
+        private void Data_Changed(object sender, EventArgs e)
+        {
+            if ((tbSelectedValue.Text.Trim()).Length > 0)
+            {
+                if (Value_Changed != null)
+                {
+                    Value_Changed(this, e);
+                    return;
+                    /*
+                    //表單對應程式碼
+                    private void comboBoxTree1_Value_Changed(object sender, EventArgs e)
+                    {
+                        textBox1.Text = comboBoxTree1.Text;
+                    } 
+                    */
+                }
+            }
+        }
+        //---C#元件事件轉發 jash add
+
+        private void RelocateGrip() 
 		{
 			this.lblSizingGrip.Top = this.frmTreeView.Height - lblSizingGrip.Height - 1;
 			this.lblSizingGrip.Left = this.frmTreeView.Width - lblSizingGrip.Width - 1;
