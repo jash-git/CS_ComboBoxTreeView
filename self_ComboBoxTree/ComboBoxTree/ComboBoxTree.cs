@@ -113,7 +113,7 @@ namespace Verlinea.ComboBoxTree
 
 			this.tvTreeView = new TreeView();
 			this.tvTreeView.BorderStyle = BorderStyle.None;
-            this.tvTreeView.DoubleClick += new EventHandler(TreeViewNodeSelect); //jash modified this.tvTreeView.Click += new EventHandler(TreeViewNodeSelect); //jash modified this.tvTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(TreeViewNodeSelect);
+            this.tvTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(TreeViewNodeSelect);//jash modified this.tvTreeView.DoubleClick += new EventHandler(TreeViewNodeSelect); //jash modified this.tvTreeView.Click += new EventHandler(TreeViewNodeSelect); //jash modified 
             this.tvTreeView.Location = new Point(0,0);
 			this.tvTreeView.LostFocus += new EventHandler(TreeViewLostFocus);
 			//this.tvTreeView.Scrollable = false;
@@ -140,6 +140,13 @@ namespace Verlinea.ComboBoxTree
 		}
 
         //---
+        //jash 清除預設選擇
+        public void ClearSelectNode()
+        {
+            tvTreeView.SelectedNode = null;
+        }
+        //---jash 清除預設選擇
+
         //C#元件事件轉發 jash add
         public event EventHandler Value_Changed;
         private void Data_Changed(object sender, EventArgs e)
@@ -172,21 +179,23 @@ namespace Verlinea.ComboBoxTree
 		{
             if (!m_blnSowToggleTreeView)//jash modified if(!this.frmTreeView.Visible) 
 			{
-				Rectangle CBRect = this.RectangleToScreen(this.ClientRectangle);
+                Rectangle CBRect = this.RectangleToScreen(this.ClientRectangle);
 				this.frmTreeView.Location = new System.Drawing.Point(CBRect.X, CBRect.Y + this.pnlBack.Height);
-                this.tvTreeView.Font = this.tbSelectedValue.Font;//jash add
-                this.frmTreeView.Show();				
-				this.frmTreeView.BringToFront();
+                this.tvTreeView.Font = this.tbSelectedValue.Font;//jash add	
+                this.frmTreeView.Show();
+                this.frmTreeView.BringToFront();
 			
 				this.RelocateGrip();
-				this.tbSelectedValue.Text = "";
-			} 
+                //this.tbSelectedValue.Text = "";
+                m_blnSowToggleTreeView = true;//jash add
+            } 
 			else 
 			{
 				this.frmTreeView.Hide();
-			}
+                m_blnSowToggleTreeView = false;
+            }
 
-            m_blnSowToggleTreeView = !m_blnSowToggleTreeView;//jash add
+            
 
         }
 
@@ -253,8 +262,11 @@ namespace Verlinea.ComboBoxTree
 
 		private void TreeViewLostFocus(object sender, EventArgs e)
 		{
-			if(!this.btnSelect.RectangleToScreen(this.btnSelect.ClientRectangle).Contains(Cursor.Position))
-				this.frmTreeView.Hide();
+            if (!this.btnSelect.RectangleToScreen(this.btnSelect.ClientRectangle).Contains(Cursor.Position))
+            {
+                this.frmTreeView.Hide();
+                m_blnSowToggleTreeView = false;
+            }
 		}
 
 		private void TreeViewNodeSelect(object sender, EventArgs e) 

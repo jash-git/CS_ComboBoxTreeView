@@ -59,6 +59,7 @@ namespace self_ComboBoxTree
                 }
                 comboBoxTree1.Nodes.Add(newTn);
             }
+            comboBoxTree1.ClearSelectNode();
 
 
         }
@@ -80,7 +81,7 @@ namespace self_ComboBoxTree
         {
             if((textBox1.Text.Trim()).Length>0)
             {
-                MessageBox.Show(textBox1.Text.Trim());
+                //MessageBox.Show(textBox1.Text.Trim());
             }
         }
 
