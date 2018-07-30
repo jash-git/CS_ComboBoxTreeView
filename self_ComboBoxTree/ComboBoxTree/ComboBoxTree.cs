@@ -54,7 +54,25 @@ namespace Verlinea.ComboBoxTree
 			get {return this.tvTreeView.ImageList;}
 			set{this.tvTreeView.ImageList = value;}
 		}
-		[Browsable(true), Description("The text in the ComboBoxTree control"), Category("Appearance")]
+
+        //---
+        //jash add 指定Image
+        [Browsable(true), Description("Gets or sets the TreeView's ImageIndex"), Category("TreeView")]
+        public int ImageIndex
+        {
+            get { return this.tvTreeView.ImageIndex; }
+            set { this.tvTreeView.ImageIndex = value; }
+        }
+
+        [Browsable(true), Description("Gets or sets the TreeView's Selected ImageIndex"), Category("TreeView")]
+        public int SelectedImageIndex
+        {
+            get { return this.tvTreeView.SelectedImageIndex; }
+            set { this.tvTreeView.SelectedImageIndex = value; }
+        }
+        //---jash add 指定Image
+
+        [Browsable(true), Description("The text in the ComboBoxTree control"), Category("Appearance")]
 		public override string Text
 		{
 			get {return this.tbSelectedValue.Text;}
