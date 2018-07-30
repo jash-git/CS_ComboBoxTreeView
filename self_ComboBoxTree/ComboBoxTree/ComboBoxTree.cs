@@ -171,7 +171,8 @@ namespace Verlinea.ComboBoxTree
 
         private void RelocateGrip() 
 		{
-			this.lblSizingGrip.Top = this.frmTreeView.Height - lblSizingGrip.Height - 1;
+            this.tvTreeView.Height = 200;//jash add 調整預設下拉式選單大小
+            this.lblSizingGrip.Top = this.frmTreeView.Height - lblSizingGrip.Height - 1;
 			this.lblSizingGrip.Left = this.frmTreeView.Width - lblSizingGrip.Width - 1;
 		}
 
@@ -181,7 +182,7 @@ namespace Verlinea.ComboBoxTree
 			{
                 Rectangle CBRect = this.RectangleToScreen(this.ClientRectangle);
 				this.frmTreeView.Location = new System.Drawing.Point(CBRect.X, CBRect.Y + this.pnlBack.Height);
-                this.tvTreeView.Font = this.tbSelectedValue.Font;//jash add	
+                this.tvTreeView.Font = this.tbSelectedValue.Font;//jash add
                 this.frmTreeView.Show();
                 this.frmTreeView.BringToFront();
 			
@@ -238,10 +239,10 @@ namespace Verlinea.ComboBoxTree
 				
 				if(TvWidth < 50)
 					TvWidth = 50;
-				if(TvHeight < 50)
-					TvHeight = 50;
-				
-				this.frmTreeView.Size = new System.Drawing.Size(TvWidth, TvHeight);
+				if(TvHeight < 200)//jash modified 拖拉時預設改變的顯示高度 if(TvHeight < 50)
+                    TvHeight = 200;//jash modified 拖拉時預設改變的顯示高度 TvHeight = 250;
+
+                this.frmTreeView.Size = new System.Drawing.Size(TvWidth, TvHeight);
 				this.pnlTree.Size = this.frmTreeView.Size;
 				this.tvTreeView.Size = new System.Drawing.Size(this.frmTreeView.Size.Width - this.lblSizingGrip.Width, this.frmTreeView.Size.Height - this.lblSizingGrip.Width);;
 				RelocateGrip();
