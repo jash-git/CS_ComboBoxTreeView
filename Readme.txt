@@ -8,6 +8,7 @@ https://www.codeproject.com/Articles/17592/DropDownPanel
 
 
 我自己根據『https://www.codeproject.com/Articles/5967/ComboBoxTree』範例做了些微調整存成 『self_ComboBoxTree』
+	●修改夏拉式選單的預設高度和最小高度為200
 	●增加元件初始化屬性預設值設定
 	●預設文字方塊是唯讀模式
 	●自訂元件『事件轉發』，方便表單抓取選擇值
